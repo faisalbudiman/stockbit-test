@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+import "google/api/annotations.proto";
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+service SearchAPI {
+    rpc Search(SearchRequest) returns(ResponseSearchAPI) {
+        option (google.api.http) = {
+            post: "/search"
+            body: "*"
+        };
+    }
+}
+
+message SearchRequest {
+    Film Search = 1 [(gogoproto.jsontag) = "Search"];
+    string TotalResults = 2 [(gogoproto.jsontag) = "totalResults"];
+    bool Response = 3 [(gogoproto.jsontag) = "Response"];
+}
+
+message Film {
+    string Title = 1 [(gogoproto.jsontag) = "Title"];
+    string Year = 2 [(gogoproto.jsontag) = "Year"];
+    string ImdbID = 3 [(gogoproto.jsontag) = "imdbID"];
+    string Type = 4 [(gogoproto.jsontag) = "Type"];
+    string Poster = 5 [(gogoproto.jsontag) = "Poster"];
+}
+
+message ResponseSearchAPI {
+    string body = 2;
+}

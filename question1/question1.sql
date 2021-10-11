@@ -1,0 +1,1 @@
+SELECT u.ID, u.UserName, p.ParentUserName FROM USER u INNER JOIN PARENT p ON p.ID=u.PARENT
